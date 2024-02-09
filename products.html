@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="uk">
+	<head>
+		<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+		<meta name="robots" content="noindex, nofollow, noarchive">
+		<title>products</title>
+		<meta name="description" content="products">
+		<style>
+			@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400; 700&display=swap");
+			:root { --color-primary: hsl(350deg 100% 90%); --surface-1: hsl(0deg 4% 99%); --surface-2: hsl(0deg 4% 96%); --surface-3: hsl(0deg 4% 90%); --surface-shadow: hsl(0deg 0% 0% / 0.025); --text: hsl(0deg 4% 12%); --text-accent: hsl(0deg 2% 22%); }
+			body:has([id="theme"]:checked) { --color-primary: hsl(286deg 46% 47%); --surface-1: hsl(0deg 5% 10%); --surface-2: hsl(0deg 5% 12%); --surface-3: hsl(0deg 4% 18%); --surface-shadow: hsl(0deg 0% 0% / 0.075); --text: hsl(0deg 2% 98%); --text-accent: hsl(0deg 2% 90%); }
+			body { margin-block: 4rem; padding-inline: 2rem; font-family: "Inter", system-ui, "Segoe UI", Roboto, Helvetica, Arial,
+			sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; font-size: 1.125rem; line-height: 1.4; color: var(--text); background-color: var(--surface-1); }
+			fieldset { display: flex; flex-wrap: wrap; gap: 0.25rem 0.75rem; margin-block-start: 0.5rem; padding: 0.5rem; background-color: var(--surface-2); border: 1px solid var(--surface-3); border-radius: 0.125rem; }
+			fieldset legend { margin-block-end: 0.25rem; }
+			fieldset div { display: flex; align-items: baseline; gap: 0.125rem; }
+			.header { margin-block-end: 2rem; }
+			.content { max-inline-size: 1000px; margin-inline: auto; }
+			.grid { container-type: inline-size; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(min(250px, 100%), 1fr)); }
+			/* Utils */
+			.u-icon-group { display: inline-flex; gap: 0.25rem; font-weight: bold; font-size: 0.8rem; }
+			.u-icon-group svg { --size: 1.2em; position: relative; top: 0.1em; flex-shrink: 0; inline-size: var(--size); block-size: var(--size); color: var(--text-accent); }
+			.u-chip { display: inline-flex; padding: 0.25rem 0.5rem; font-variant-numeric: tabular-nums; font-weight: unset; border: 1px solid var(--color-primary); background-color: var(--color-primary); border-radius: 0.15rem; }
+			.u-chip--outline { background-color: unset; }
+			/* Card */
+			.card { container-type: inline-size; display: flex; flex-direction: column; background-color: var(--surface-2); border-radius: 0.5rem; overflow: hidden; box-shadow: 0 1px 2px var(--surface-shadow), 0 2px 4px var(--surface-shadow),
+			0 4px 8px var(--surface-shadow), 0 8px 16px var(--surface-shadow),
+			0 16px 32px var(--surface-shadow), 0 32px 64px var(--surface-shadow); }
+			.card .image { inline-size: 100%; block-size: auto; aspect-ratio: 16/9; object-fit: cover; vertical-align: bottom; }
+			.card .content { flex-grow: 1; display: flex; flex-wrap: wrap; align-content: flex-start; gap: clamp(0.5rem, 5cqw, 0.75rem); padding: clamp(1rem, 5cqw, 1.5rem); }
+			.card .title { flex-basis: 100%; font-weight: bold; font-size: clamp(1.5rem, 9cqw, 2rem); line-height: 1.2; }
+			.card .description { flex-basis: 100%; font-size: clamp(0.8rem, 5cqw, 1rem); }
+			.card .contact { display: flex; flex-direction: column; gap: 0.25rem 1rem; }
+			.card .footer { display: flex; flex-wrap: wrap; gap: 0.5rem; padding: clamp(1rem, 5cqw, 1.5rem); }
+			.card .category { margin-inline-end: auto; }
+			@container (min-width: 350px){
+			.card .contact { flex-direction: row; flex-wrap: wrap; } }
+			body:has([id="layout"]:checked) .grid { grid-template-columns: initial; }
+			@container (min-width: 600px) { body:has([id="layout"]:checked) .card { display: grid; grid-template-columns: auto 1fr; grid-template-areas:
+			"image content"
+			"image content"; }
+			body:has([id="layout"]:checked) .card .image { grid-area: image; max-inline-size: 300px; height: 100%; } }
+			body:has([name="filter"][value="bakery"]:checked)
+			.card:not([data-category="bakery"]) { display: none; }
+			body:has([name="filter"][value="diner"]:checked)
+			.card:not([data-category="diner"]) { display: none; }
+			body:has([name="filter"][value="café"]:checked)
+			.card:not([data-category="café"]) { display: none; }
+			body:has([name="filter"][value="taquería"]:checked)
+			.card:not([data-category="taquería"]) { display: none; }
+			/* Check browser support */
+			.warning { display: none; }
+			@supports not (selector(:has(+ *))) { code { position: relative; top: -0.04em; font-size: 1.1em; font-family: "Courier", monospace; }
+			.warning { display: block; margin-block-end: 0.5rem; flex: 1 0 100%; font-size: 0.8em; line-height: 1.2; background-color: papayawhip; padding: 1rem; border-radius: 0.25rem; } }
+		</style>
+	</head>
+	<body>
+		<header class="content header">
+			<p class="warning">This browser does not support the CSS <code>:has()</code> function. <a href="https://caniuse.com/css-has">Review current support</a></p>
+			<p class="warning">This browser does not support CSS container queries. <a href="https://caniuse.com/css-container-queries">Review current support</a></p>
+			<div class="input-container">
+				<input id="theme" type="checkbox" />
+				<label for="theme">Set dark theme</label>
+			</div>
+			<div class="input-container">
+				<input id="layout" type="checkbox" />
+				<label for="layout">Display in stacked layout</label>
+			</div>
+			<fieldset class="input-container filter">
+				<legend>Filter by category:</legend>
+				<div>
+					<input id="filter-all" type="radio" name="filter" value="all" checked="checked" />
+					<label for="filter-all">All</label>
+				</div>
+				<div>
+					<input id="filter-cafe" type="radio" name="filter" value="café" />
+					<label for="filter-cafe">Cafés</label>
+				</div>
+				<div>
+					<input id="filter-bakery" type="radio" name="filter" value="bakery" />
+					<label for="filter-bakery">Bakeries</label>
+				</div>
+				<div>
+					<input id="filter-diner" type="radio" name="filter" value="diner" />
+					<label for="filter-diner">Diners</label>
+				</div>
+				<div>
+					<input id="filter-taqueria" type="radio" name="filter" value="taquería" />
+					<label for="filter-taqueria">Taquerías</label>
+				</div>
+			</fieldset>
+		</header>
+		<main class="content grid">
+			<article class="card" data-category="café" tabindex="0"><img class="image" src="https://images.unsplash.com/photo-1544047963-0cfb7692fd4b?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=MnwzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NzMzMTUyMzU&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=600" alt="" width="600" height="338" />
+				<div class="content">
+					<h2 class="title">Grounds Beach Bistro</h2>
+					<div class="contact">
+						<div class="location u-icon-group">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentcolor" viewbox="0 0 256 256">
+								<rect width="256" height="256" fill="none"></rect>
+								<line x1="56" y1="232" x2="200" y2="232" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></line>
+								<circle cx="128" cy="104" r="32" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></circle>
+								<path d="M208,104c0,72-80,128-80,128S48,176,48,104a80,80,0,0,1,160,0Z" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></path>
+							</svg><span>Asbury Park, NJ</span>
+						</div>
+						<div class="phone u-icon-group">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentcolor" viewbox="0 0 256 256">
+								<rect width="256" height="256" fill="none"></rect>
+								<path d="M159.4,40A80.1,80.1,0,0,1,216,96.6" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></path>
+								<path d="M92.5,124.8a83.6,83.6,0,0,0,39,38.9,8,8,0,0,0,7.9-.6l25-16.7a7.9,7.9,0,0,1,7.6-.7l46.8,20.1a7.9,7.9,0,0,1,4.8,8.3A48,48,0,0,1,176,216,136,136,0,0,1,40,80,48,48,0,0,1,81.9,32.4a7.9,7.9,0,0,1,8.3,4.8l20.1,46.9a8,8,0,0,1-.6,7.5L93,117A8,8,0,0,0,92.5,124.8Z" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></path>
+								<path d="M149.2,78A44.1,44.1,0,0,1,178,106.8" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></path>
+							</svg><span>(732) 555-2168</span>
+						</div>
+					</div>
+					<p class="description">This hip café a block from the shore knows how to brew the perfect cup of fresh coffee.</p>
+				</div>
+				<div class="footer">
+					<div class="category u-icon-group u-chip u-chip--outline">Café</div>
+					<div class="rating u-icon-group u-chip">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentcolor" viewbox="0 0 256 256">
+							<rect width="256" height="256" fill="none"></rect>
+							<path d="M239.2,97.4A16.4,16.4,0,0,0,224.6,86l-59.4-4.1-22-55.5A16.4,16.4,0,0,0,128,16h0a16.4,16.4,0,0,0-15.2,10.4L90.4,82.2,31.4,86A16.5,16.5,0,0,0,16.8,97.4,16.8,16.8,0,0,0,22,115.5l45.4,38.4L53.9,207a18.5,18.5,0,0,0,7,19.6,18,18,0,0,0,20.1.6l46.9-29.7h.2l50.5,31.9a16.1,16.1,0,0,0,8.7,2.6,16.5,16.5,0,0,0,15.8-20.8l-14.3-58.1L234,115.5A16.8,16.8,0,0,0,239.2,97.4Z"></path>
+						</svg><span>5</span>
+					</div>
+				</div>
+			</article>
+			<article class="card" data-category="diner" tabindex="0"><img class="image" src="https://images.unsplash.com/photo-1587651728606-fd7cf2cfed5f?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=MnwzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NzMzMTUyMzU&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=600" alt="" width="600" height="338" />
+				<div class="content">
+					<h2 class="title">Starlite Diner</h2>
+					<div class="contact">
+						<div class="location u-icon-group">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentcolor" viewbox="0 0 256 256">
+								<rect width="256" height="256" fill="none"></rect>
+								<line x1="56" y1="232" x2="200" y2="232" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></line>
+								<circle cx="128" cy="104" r="32" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></circle>
+								<path d="M208,104c0,72-80,128-80,128S48,176,48,104a80,80,0,0,1,160,0Z" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></path>
+							</svg><span>Denver, CO</span>
+						</div>
+						<div class="phone u-icon-group">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentcolor" viewbox="0 0 256 256">
+								<rect width="256" height="256" fill="none"></rect>
+								<path d="M159.4,40A80.1,80.1,0,0,1,216,96.6" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></path>
+								<path d="M92.5,124.8a83.6,83.6,0,0,0,39,38.9,8,8,0,0,0,7.9-.6l25-16.7a7.9,7.9,0,0,1,7.6-.7l46.8,20.1a7.9,7.9,0,0,1,4.8,8.3A48,48,0,0,1,176,216,136,136,0,0,1,40,80,48,48,0,0,1,81.9,32.4a7.9,7.9,0,0,1,8.3,4.8l20.1,46.9a8,8,0,0,1-.6,7.5L93,117A8,8,0,0,0,92.5,124.8Z" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></path>
+								<path d="M149.2,78A44.1,44.1,0,0,1,178,106.8" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></path>
+							</svg><span>(303) 555-1482</span>
+						</div>
+					</div>
+					<p class="description">Top-notch breakfast foods abounds featured at this hidden gem.</p>
+				</div>
+				<div class="footer">
+					<div class="category u-icon-group u-chip u-chip--outline">Diner</div>
+					<div class="rating u-icon-group u-chip">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentcolor" viewbox="0 0 256 256">
+							<rect width="256" height="256" fill="none"></rect>
+							<path d="M239.2,97.4A16.4,16.4,0,0,0,224.6,86l-59.4-4.1-22-55.5A16.4,16.4,0,0,0,128,16h0a16.4,16.4,0,0,0-15.2,10.4L90.4,82.2,31.4,86A16.5,16.5,0,0,0,16.8,97.4,16.8,16.8,0,0,0,22,115.5l45.4,38.4L53.9,207a18.5,18.5,0,0,0,7,19.6,18,18,0,0,0,20.1.6l46.9-29.7h.2l50.5,31.9a16.1,16.1,0,0,0,8.7,2.6,16.5,16.5,0,0,0,15.8-20.8l-14.3-58.1L234,115.5A16.8,16.8,0,0,0,239.2,97.4Z"></path>
+						</svg><span>4.65</span>
+					</div>
+				</div>
+			</article>
+			<article class="card" data-category="bakery" tabindex="0"><img class="image" src="https://images.unsplash.com/photo-1602419260650-697189b3d7db?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=MnwzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NzMzMTUyMzU&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=600" alt="" width="600" height="338" />
+				<div class="content">
+					<h2 class="title">Hello, Donut!</h2>
+					<div class="contact">
+						<div class="location u-icon-group">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentcolor" viewbox="0 0 256 256">
+								<rect width="256" height="256" fill="none"></rect>
+								<line x1="56" y1="232" x2="200" y2="232" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></line>
+								<circle cx="128" cy="104" r="32" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></circle>
+								<path d="M208,104c0,72-80,128-80,128S48,176,48,104a80,80,0,0,1,160,0Z" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></path>
+							</svg><span>Long Beach, CA</span>
+						</div>
+						<div class="phone u-icon-group">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentcolor" viewbox="0 0 256 256">
+								<rect width="256" height="256" fill="none"></rect>
+								<path d="M159.4,40A80.1,80.1,0,0,1,216,96.6" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></path>
+								<path d="M92.5,124.8a83.6,83.6,0,0,0,39,38.9,8,8,0,0,0,7.9-.6l25-16.7a7.9,7.9,0,0,1,7.6-.7l46.8,20.1a7.9,7.9,0,0,1,4.8,8.3A48,48,0,0,1,176,216,136,136,0,0,1,40,80,48,48,0,0,1,81.9,32.4a7.9,7.9,0,0,1,8.3,4.8l20.1,46.9a8,8,0,0,1-.6,7.5L93,117A8,8,0,0,0,92.5,124.8Z" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></path>
+								<path d="M149.2,78A44.1,44.1,0,0,1,178,106.8" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></path>
+							</svg><span>(562) 555-1265</span>
+						</div>
+					</div>
+					<p class="description">With a selection of donuts that seems near infinite, there's something for everyone.</p>
+				</div>
+				<div class="footer">
+					<div class="category u-icon-group u-chip u-chip--outline">Bakery</div>
+					<div class="rating u-icon-group u-chip">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentcolor" viewbox="0 0 256 256">
+							<rect width="256" height="256" fill="none"></rect>
+							<path d="M239.2,97.4A16.4,16.4,0,0,0,224.6,86l-59.4-4.1-22-55.5A16.4,16.4,0,0,0,128,16h0a16.4,16.4,0,0,0-15.2,10.4L90.4,82.2,31.4,86A16.5,16.5,0,0,0,16.8,97.4,16.8,16.8,0,0,0,22,115.5l45.4,38.4L53.9,207a18.5,18.5,0,0,0,7,19.6,18,18,0,0,0,20.1.6l46.9-29.7h.2l50.5,31.9a16.1,16.1,0,0,0,8.7,2.6,16.5,16.5,0,0,0,15.8-20.8l-14.3-58.1L234,115.5A16.8,16.8,0,0,0,239.2,97.4Z"></path>
+						</svg><span>4.8</span>
+					</div>
+				</div>
+			</article>
+			<article class="card" data-category="diner" tabindex="0"><img class="image" src="https://images.unsplash.com/photo-1630278156268-12d56c2e135f?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=MnwzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NzMzMTUyMzU&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=600" alt="" width="600" height="338" />
+				<div class="content">
+					<h2 class="title">Stacked Shack</h2>
+					<div class="contact">
+						<div class="location u-icon-group">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentcolor" viewbox="0 0 256 256">
+								<rect width="256" height="256" fill="none"></rect>
+								<line x1="56" y1="232" x2="200" y2="232" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></line>
+								<circle cx="128" cy="104" r="32" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></circle>
+								<path d="M208,104c0,72-80,128-80,128S48,176,48,104a80,80,0,0,1,160,0Z" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></path>
+							</svg><span>Chicago, IL</span>
+						</div>
+						<div class="phone u-icon-group">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentcolor" viewbox="0 0 256 256">
+								<rect width="256" height="256" fill="none"></rect>
+								<path d="M159.4,40A80.1,80.1,0,0,1,216,96.6" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></path>
+								<path d="M92.5,124.8a83.6,83.6,0,0,0,39,38.9,8,8,0,0,0,7.9-.6l25-16.7a7.9,7.9,0,0,1,7.6-.7l46.8,20.1a7.9,7.9,0,0,1,4.8,8.3A48,48,0,0,1,176,216,136,136,0,0,1,40,80,48,48,0,0,1,81.9,32.4a7.9,7.9,0,0,1,8.3,4.8l20.1,46.9a8,8,0,0,1-.6,7.5L93,117A8,8,0,0,0,92.5,124.8Z" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></path>
+								<path d="M149.2,78A44.1,44.1,0,0,1,178,106.8" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></path>
+							</svg><span>(312) 555-1100</span>
+						</div>
+					</div>
+					<p class="description">A classic late-night eatery here to satisfy all your biggest cravings.</p>
+				</div>
+				<div class="footer">
+					<div class="category u-icon-group u-chip u-chip--outline">Diner</div>
+					<div class="rating u-icon-group u-chip">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentcolor" viewbox="0 0 256 256">
+							<rect width="256" height="256" fill="none"></rect>
+							<path d="M239.2,97.4A16.4,16.4,0,0,0,224.6,86l-59.4-4.1-22-55.5A16.4,16.4,0,0,0,128,16h0a16.4,16.4,0,0,0-15.2,10.4L90.4,82.2,31.4,86A16.5,16.5,0,0,0,16.8,97.4,16.8,16.8,0,0,0,22,115.5l45.4,38.4L53.9,207a18.5,18.5,0,0,0,7,19.6,18,18,0,0,0,20.1.6l46.9-29.7h.2l50.5,31.9a16.1,16.1,0,0,0,8.7,2.6,16.5,16.5,0,0,0,15.8-20.8l-14.3-58.1L234,115.5A16.8,16.8,0,0,0,239.2,97.4Z"></path>
+						</svg><span>4.76</span>
+					</div>
+				</div>
+			</article>
+			<article class="card" data-category="taquería" tabindex="0"><img class="image" src="https://images.unsplash.com/photo-1574782090889-7567420ce7e9?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=MnwzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NzMzMTUyMzU&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=600" alt="" width="600" height="338" />
+				<div class="content">
+					<h2 class="title">Buena Cantina</h2>
+					<div class="contact">
+						<div class="location u-icon-group">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentcolor" viewbox="0 0 256 256">
+								<rect width="256" height="256" fill="none"></rect>
+								<line x1="56" y1="232" x2="200" y2="232" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></line>
+								<circle cx="128" cy="104" r="32" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></circle>
+								<path d="M208,104c0,72-80,128-80,128S48,176,48,104a80,80,0,0,1,160,0Z" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></path>
+							</svg><span>San Diego, CA</span>
+						</div>
+						<div class="phone u-icon-group">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentcolor" viewbox="0 0 256 256">
+								<rect width="256" height="256" fill="none"></rect>
+								<path d="M159.4,40A80.1,80.1,0,0,1,216,96.6" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></path>
+								<path d="M92.5,124.8a83.6,83.6,0,0,0,39,38.9,8,8,0,0,0,7.9-.6l25-16.7a7.9,7.9,0,0,1,7.6-.7l46.8,20.1a7.9,7.9,0,0,1,4.8,8.3A48,48,0,0,1,176,216,136,136,0,0,1,40,80,48,48,0,0,1,81.9,32.4a7.9,7.9,0,0,1,8.3,4.8l20.1,46.9a8,8,0,0,1-.6,7.5L93,117A8,8,0,0,0,92.5,124.8Z" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></path>
+								<path d="M149.2,78A44.1,44.1,0,0,1,178,106.8" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></path>
+							</svg><span>(619) 555-1000</span>
+						</div>
+					</div>
+					<p class="description">Some of the best fish tacos to be found on the west coast.</p>
+				</div>
+				<div class="footer">
+					<div class="category u-icon-group u-chip u-chip--outline">Taquería</div>
+					<div class="rating u-icon-group u-chip">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentcolor" viewbox="0 0 256 256">
+							<rect width="256" height="256" fill="none"></rect>
+							<path d="M239.2,97.4A16.4,16.4,0,0,0,224.6,86l-59.4-4.1-22-55.5A16.4,16.4,0,0,0,128,16h0a16.4,16.4,0,0,0-15.2,10.4L90.4,82.2,31.4,86A16.5,16.5,0,0,0,16.8,97.4,16.8,16.8,0,0,0,22,115.5l45.4,38.4L53.9,207a18.5,18.5,0,0,0,7,19.6,18,18,0,0,0,20.1.6l46.9-29.7h.2l50.5,31.9a16.1,16.1,0,0,0,8.7,2.6,16.5,16.5,0,0,0,15.8-20.8l-14.3-58.1L234,115.5A16.8,16.8,0,0,0,239.2,97.4Z"></path>
+						</svg><span>4.94</span>
+					</div>
+				</div>
+			</article>
+			<article class="card" data-category="bakery" tabindex="0"><img class="image" src="https://images.unsplash.com/photo-1473447547337-5770a453122d?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=MnwzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NzMzMTUyMzU&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=600" alt="" width="600" height="338" />
+				<div class="content">
+					<h2 class="title">Destination Dough</h2>
+					<div class="contact">
+						<div class="location u-icon-group">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentcolor" viewbox="0 0 256 256">
+								<rect width="256" height="256" fill="none"></rect>
+								<line x1="56" y1="232" x2="200" y2="232" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></line>
+								<circle cx="128" cy="104" r="32" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></circle>
+								<path d="M208,104c0,72-80,128-80,128S48,176,48,104a80,80,0,0,1,160,0Z" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></path>
+							</svg><span>New York, NY</span>
+						</div>
+						<div class="phone u-icon-group">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentcolor" viewbox="0 0 256 256">
+								<rect width="256" height="256" fill="none"></rect>
+								<path d="M159.4,40A80.1,80.1,0,0,1,216,96.6" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></path>
+								<path d="M92.5,124.8a83.6,83.6,0,0,0,39,38.9,8,8,0,0,0,7.9-.6l25-16.7a7.9,7.9,0,0,1,7.6-.7l46.8,20.1a7.9,7.9,0,0,1,4.8,8.3A48,48,0,0,1,176,216,136,136,0,0,1,40,80,48,48,0,0,1,81.9,32.4a7.9,7.9,0,0,1,8.3,4.8l20.1,46.9a8,8,0,0,1-.6,7.5L93,117A8,8,0,0,0,92.5,124.8Z" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></path>
+								<path d="M149.2,78A44.1,44.1,0,0,1,178,106.8" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></path>
+							</svg><span>(212) 555-9923</span>
+						</div>
+					</div>
+					<p class="description">From fresh loaves of bread to flaky, buttery croissants, everything is baked in-house daily.</p>
+				</div>
+				<div class="footer">
+					<div class="category u-icon-group u-chip u-chip--outline">Bakery</div>
+					<div class="rating u-icon-group u-chip">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentcolor" viewbox="0 0 256 256">
+							<rect width="256" height="256" fill="none"></rect>
+							<path d="M239.2,97.4A16.4,16.4,0,0,0,224.6,86l-59.4-4.1-22-55.5A16.4,16.4,0,0,0,128,16h0a16.4,16.4,0,0,0-15.2,10.4L90.4,82.2,31.4,86A16.5,16.5,0,0,0,16.8,97.4,16.8,16.8,0,0,0,22,115.5l45.4,38.4L53.9,207a18.5,18.5,0,0,0,7,19.6,18,18,0,0,0,20.1.6l46.9-29.7h.2l50.5,31.9a16.1,16.1,0,0,0,8.7,2.6,16.5,16.5,0,0,0,15.8-20.8l-14.3-58.1L234,115.5A16.8,16.8,0,0,0,239.2,97.4Z"></path>
+						</svg><span>4.7</span>
+					</div>
+				</div>
+			</article>
+		</main>
+	</body>
+</html>
