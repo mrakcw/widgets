@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Geo widget</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<style>.geo{margin:.5rem auto;width:100%;font-family:'Source Code Pro';}.geo p{font-size:.8em;text-align:center;}body{margin:0;padding:0;position:relative;display:grid;place-items:center;}</style>
+	<script>
+		$.ajax({ url: "https://ipinfo.io", dataType: "jsonp", success: function(data){ console.log(data); var cityRegion = data.city +', '+data.region, ip = data.ip; $('.city-region').text(cityRegion); $('.ip').text(ip);}});
+	</script>
+</head>
+<body>
+	<div class="geo"><p>Location: <span class="city-region"></span><br>IP: <span class="ip"></span></p></div>
+</body>
+</html>
