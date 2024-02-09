@@ -196,4 +196,4 @@ footer .attribution img{width:150px;}
 body{background-color:transparent;}
 #lbl{font-family:monospace;font-size:xx-large;color:#626262;padding:5px;text-align:center;line-height:1.5;height:85%}
 #date{font-size:large;}
-.weatherwidget-io{pointer-events:none;}
+a.weatherwidget-io{pointer-events:none!important;}
