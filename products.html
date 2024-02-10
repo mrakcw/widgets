@@ -20,7 +20,8 @@
 			.col{display:flex;flex-direction:column;}
 			.row{display:flex;flex-direction:row;justify-content:space-between;width:auto;}
 			.row.col-2{max-height: 3rem;}
-			.input-container:has(.switch-button){ transform: scale(0.25);display: flex;width: 1rem;}
+			.input-container:has(.switch-button){ transform: scale(0.25);display: flex;width: 1rem;position: relative;top: -15px;}
+			.input-container:has(#layout){display:flex;align-items:center;}
 			.grid { container-type: inline-size; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(min(250px, 100%), 1fr)); }
 			/* Utils */
 			.u-icon-group { display: inline-flex; gap: 0.25rem; font-weight: bold; font-size: 0.8rem; }
@@ -28,9 +29,7 @@
 			.u-chip { display: inline-flex; padding: 0.25rem 0.5rem; font-variant-numeric: tabular-nums; font-weight: unset; border: 1px solid var(--color-primary); background-color: var(--color-primary); border-radius: 0.15rem; }
 			.u-chip--outline { background-color: unset; }
 			/* Card */
-			.card { container-type: inline-size; display: flex; flex-direction: column; background-color: var(--surface-2); border-radius: 0.5rem; overflow: hidden; box-shadow: 0 1px 2px var(--surface-shadow), 0 2px 4px var(--surface-shadow),
-			0 4px 8px var(--surface-shadow), 0 8px 16px var(--surface-shadow),
-			0 16px 32px var(--surface-shadow), 0 32px 64px var(--surface-shadow); }
+			.card { container-type: inline-size; display: flex; flex-direction: column; background-color: var(--surface-2); border-radius: 0.5rem; overflow: hidden; box-shadow: 0 1px 2px var(--surface-shadow), 0 2px 4px var(--surface-shadow), 0 4px 8px var(--surface-shadow), 0 8px 16px var(--surface-shadow), 0 16px 32px var(--surface-shadow), 0 32px 64px var(--surface-shadow); }
 			.card .image { inline-size: 100%; block-size: auto; aspect-ratio: 16/9; object-fit: cover; vertical-align: bottom; }
 			.card .content { flex-grow: 1; display: flex; flex-wrap: wrap; align-content: flex-start; gap: clamp(0.5rem, 5cqw, 0.75rem); padding: clamp(1rem, 5cqw, 1.5rem); }
 			.card .title { flex-basis: 100%; font-weight: bold; font-size: clamp(1.5rem, 9cqw, 2rem); line-height: 1.2; }
@@ -89,7 +88,7 @@
 				</div>
 				<div class="input-container">
 					<input id="layout" type="checkbox" />
-					<label for="layout">Display in stacked layout</label>
+					<label for="layout">Відображення в макеті</label>
 				</div>
 			</div>
 			<div class="row">
