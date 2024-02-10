@@ -7,7 +7,7 @@
 		<title>products</title>
 		<meta name="description" content="products">
 		<style>
-			@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400; 700&display=swap");
+			/* @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400; 700&display=swap"); */
 			:root { --color-primary: hsl(350deg 100% 90%); --surface-1: hsl(0deg 4% 99%); --surface-2: hsl(0deg 4% 96%); --surface-3: hsl(0deg 4% 90%); --surface-shadow: hsl(0deg 0% 0% / 0.025); --text: hsl(0deg 4% 12%); --text-accent: hsl(0deg 2% 22%); }
 			body:has([id="theme"]:checked) { --color-primary: hsl(286deg 46% 47%); --surface-1: hsl(0deg 5% 10%); --surface-2: hsl(0deg 5% 12%); --surface-3: hsl(0deg 4% 18%); --surface-shadow: hsl(0deg 0% 0% / 0.075); --text: hsl(0deg 2% 98%); --text-accent: hsl(0deg 2% 90%); }
 			body { margin-block: 4rem; padding-inline: 2rem; font-family: "Inter", system-ui, "Segoe UI", Roboto, Helvetica, Arial,
@@ -16,7 +16,9 @@
 			fieldset legend { margin-block-end: 0.25rem; }
 			fieldset div { display: flex; align-items: baseline; gap: 0.125rem; }
 			.header { margin-block-end: 2rem; }
-			.content { max-inline-size: 1000px; margin-inline: auto; }
+			.content{ max-inline-size: 1000px; margin-inline: auto;display: grid; grid-template-columns: auto; gap: 0 1rem;}
+			.col{display:flex;flex-direction:column;}
+			.row{display:flex;flex-direction:row;justify-content:space-between;width:auto;}
 			.grid { container-type: inline-size; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(min(250px, 100%), 1fr)); }
 			/* Utils */
 			.u-icon-group { display: inline-flex; gap: 0.25rem; font-weight: bold; font-size: 0.8rem; }
@@ -37,9 +39,7 @@
 			@container (min-width: 350px){
 			.card .contact { flex-direction: row; flex-wrap: wrap; } }
 			body:has([id="layout"]:checked) .grid { grid-template-columns: initial; }
-			@container (min-width: 600px) { body:has([id="layout"]:checked) .card { display: grid; grid-template-columns: auto 1fr; grid-template-areas:
-			"image content"
-			"image content"; }
+			@container (min-width: 600px) { body:has([id="layout"]:checked) .card { display: grid; grid-template-columns: auto 1fr; grid-template-areas: "image content" "image content"; }
 			body:has([id="layout"]:checked) .card .image { grid-area: image; max-inline-size: 300px; height: 100%; } }
 			body:has([name="filter"][value="bakery"]:checked)
 			.card:not([data-category="bakery"]) { display: none; }
@@ -54,42 +54,67 @@
 			@supports not (selector(:has(+ *))) { code { position: relative; top: -0.04em; font-size: 1.1em; font-family: "Courier", monospace; }
 			.warning { display: block; margin-block-end: 0.5rem; flex: 1 0 100%; font-size: 0.8em; line-height: 1.2; background-color: papayawhip; padding: 1rem; border-radius: 0.25rem; } }
 		</style>
+		<style>
+			.switch-button{ display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; align-items: center; -webkit-box-pack: center; justify-content: center; justify-content: center; margin: auto; height: 165px;}
+			.switch-button .switch-outer{ height: 100%; background: #252532; width: 345px; border-radius: 165px; -webkit-box-shadow: inset 0px 5px 10px 0px #16151c, 0px 3px 6px -2px #403f4e; box-shadow: inset 0px 5px 10px 0px #16151c, 0px 3px 6px -2px #403f4e; border: 1px solid #32303e; padding: 20px; -webkit-box-sizing: border-box; box-sizing: border-box; cursor: pointer; -webkit-tap-highlight-color: transparent;}
+			.switch-button .switch-outer input[type="checkbox"]{ opacity: 0; -webkit-appearance: none; -moz-appearance: none; appearance: none; position: absolute;}
+			.switch-button .switch-outer .button-toggle{ height: 125px; width: 125px; background: -webkit-gradient( linear, left top, left bottom, from(#3b3a4e), to(#272733) ); background: -o-linear-gradient(#3b3a4e, #272733); background: linear-gradient(#3b3a4e, #272733); border-radius: 100%; -webkit-box-shadow: inset 0px 5px 4px 0px #424151, 0px 4px 15px 0px #0f0e17; box-shadow: inset 0px 5px 4px 0px #424151, 0px 4px 15px 0px #0f0e17; position: relative; z-index: 2; -webkit-transition: left 0.3s ease-in; -o-transition: left 0.3s ease-in; transition: left 0.3s ease-in; left: 0;} 
+			.switch-button .switch-outer input[type="checkbox"]:checked + .button .button-toggle{ left: 58%;} 
+			.switch-button .switch-outer input[type="checkbox"]:checked + .button .button-indicator{ -webkit-animation: indicator 1s forwards; animation: indicator 1s forwards;} 
+			.switch-button .switch-outer .button{ width: 100%; height: 100%; display: -webkit-box; display: -ms-flexbox; display: flex; position: relative; -webkit-box-pack: justify; justify-content: space-between;} 
+			.switch-button .switch-outer .button-indicator{ height: 68px; width: 68px; top: 50%; -webkit-transform: translateY(-50%); transform: translateY(-50%); border-radius: 50%; border: 3px solid #ef565f; -webkit-box-sizing: border-box; box-sizing: border-box; right: 30px; position: relative;} 
+			@-webkit-keyframes indicator{ 30%{ opacity: 0;} 0%{ opacity: 1;} 100%{ opacity: 1; border: 3px solid #60d480; left: -68%;}} 
+			@keyframes indicator{ 30%{ opacity: 0;} 0%{ opacity: 1;} 100%{ opacity: 1; border: 3px solid #60d480; left: -68%;}}
+		</style>
 	</head>
 	<body>
 		<header class="content header">
-			<p class="warning">This browser does not support the CSS <code>:has()</code> function. <a href="https://caniuse.com/css-has">Review current support</a></p>
-			<p class="warning">This browser does not support CSS container queries. <a href="https://caniuse.com/css-container-queries">Review current support</a></p>
-			<div class="input-container">
-				<input id="theme" type="checkbox" />
-				<label for="theme">Set dark theme</label>
+			<div class="col">
+				<p class="warning">This browser does not support the CSS <code>:has()</code> function. <a href="https://caniuse.com/css-has">Review current support</a></p>
+				<p class="warning">This browser does not support CSS container queries. <a href="https://caniuse.com/css-container-queries">Review current support</a></p>
 			</div>
-			<div class="input-container">
-				<input id="layout" type="checkbox" />
-				<label for="layout">Display in stacked layout</label>
+			<div class="row col-2">
+				<div class="input-container">
+					<label for="theme" class="switch-button">
+						<div class="switch-outer">
+							<input type="checkbox"  id="theme" />
+							<div class="button">
+								<span class="button-toggle"></span>
+								<span class="button-indicator"></span>
+							</div>
+						</div>
+					</label>
+				</div>
+				<div class="input-container">
+					<input id="layout" type="checkbox" />
+					<label for="layout">Display in stacked layout</label>
+				</div>
 			</div>
-			<fieldset class="input-container filter">
-				<legend>Filter by category:</legend>
-				<div>
-					<input id="filter-all" type="radio" name="filter" value="all" checked="checked" />
-					<label for="filter-all">All</label>
-				</div>
-				<div>
-					<input id="filter-cafe" type="radio" name="filter" value="café" />
-					<label for="filter-cafe">Cafés</label>
-				</div>
-				<div>
-					<input id="filter-bakery" type="radio" name="filter" value="bakery" />
-					<label for="filter-bakery">Bakeries</label>
-				</div>
-				<div>
-					<input id="filter-diner" type="radio" name="filter" value="diner" />
-					<label for="filter-diner">Diners</label>
-				</div>
-				<div>
-					<input id="filter-taqueria" type="radio" name="filter" value="taquería" />
-					<label for="filter-taqueria">Taquerías</label>
-				</div>
-			</fieldset>
+			<div class="row">
+				<fieldset class="input-container filter">
+					<legend>Filter by category:</legend>
+					<div>
+						<input id="filter-all" type="radio" name="filter" value="all" checked="checked" />
+						<label for="filter-all">All</label>
+					</div>
+					<div>
+						<input id="filter-cafe" type="radio" name="filter" value="café" />
+						<label for="filter-cafe">Cafés</label>
+					</div>
+					<div>
+						<input id="filter-bakery" type="radio" name="filter" value="bakery" />
+						<label for="filter-bakery">Bakeries</label>
+					</div>
+					<div>
+						<input id="filter-diner" type="radio" name="filter" value="diner" />
+						<label for="filter-diner">Diners</label>
+					</div>
+					<div>
+						<input id="filter-taqueria" type="radio" name="filter" value="taquería" />
+						<label for="filter-taqueria">Taquerías</label>
+					</div>
+				</fieldset>
+			</div>
 		</header>
 		<main class="content grid">
 			<article class="card" data-category="café" tabindex="0"><img class="image" src="https://images.unsplash.com/photo-1544047963-0cfb7692fd4b?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=MnwzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NzMzMTUyMzU&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=600" alt="" width="600" height="338" />
