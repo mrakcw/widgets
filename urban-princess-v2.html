@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <title>Urban Princess Beauty Doctor Tonya</title>
+  <link rel='stylesheet' href='https://unpkg.com/splitting/dist/splitting.css'>
+  <link rel='stylesheet' href='https://unpkg.com/splitting/dist/splitting-cells.css'>
+  <style>
+    /* Clear out these styles to start fresh or use this as a base! */
+    @import url("https://fonts.googleapis.com/css2?family=Notable&family=Oswald:wght@700&display=swap");html { height: 100%; display: flex; } 
+
+    body { margin: auto; } 
+
+    html,
+    body { background: #00043c; color: #fff; font: normal 600 8vw/1 "Notable", sans-serif; font-family: "Oswald", sans-serif; font-weight: 700; text-transform: uppercase; } 
+
+    .splitting .char { visibility: hidden; } 
+    .splitting .char::before, .splitting .char::after { visibility: visible; animation: slide-in 4s linear both infinite; animation-delay: calc((40ms * var(--char-index))); transform-origin: top center; } 
+    .splitting .char::before { animation-delay: calc(100ms + (40ms * var(--char-index))), calc(100ms + (80ms * var(--char-index))); animation-name: slide-in, colorize; animation-timing-function: linear, linear; } 
+
+    @keyframes slide-in { 0%, 50%, 100% { transform: translateY(-150%) scaleY(4); animation-timing-function: cubic-bezier(1, 0, 0.4, 1); } 
+    20%, 30% { transform: translateY(-110%) scaleY(1); animation-timing-function: cubic-bezier(0.8, 0, 0.2, 1); } 
+    70%, 80% { transform: translateY(130%) scaleY(1); animation-timing-function: cubic-bezier(0.8, 0, 0.2, 1); } 
+    }
+    @keyframes colorize { 0%, 100% { color: #f7856e; } 
+    30% { color: #47eb47; } 
+    70% { color: #cf47eb; } 
+    }
+  </style>
+</head>
+<body>
+<div data-splitting>Don't stop believing!</div>
+  <script src='https://unpkg.com/splitting/dist/splitting.min.js'></script>
+  <script>
+    Splitting();
+    let el = document.body;
+    el.addEventListener("click", function (e){ el.hidden=true; requestAnimationFrame(()=>{ el.hidden=false;});});
+    var s = document.createElement("style");
+    s.innerHTML = " *, *:before, *:after { animation-play-state: paused !important; }";
+    document.addEventListener("keypress", function (){ s.parentNode ? document.head.removeChild(s) : document.head.appendChild(s);});
+  </script>
+</body>
+</html>
